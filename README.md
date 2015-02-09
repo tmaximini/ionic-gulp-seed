@@ -30,6 +30,9 @@ I know there is [wiredep](https://github.com/taptapship/wiredep) but I prefer to
 
 ## Workflow
 
+This doc assumes you have `gulp` globally installed (`npm install -g gulp`).
+If you do not have / want gulp globally installed, you can run `npm run gulp` instead.
+
 #### Development mode
 
 By running just `gulp`, we start our development build process, consisting of:
