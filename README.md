@@ -19,12 +19,13 @@ The source code lives inside the `app` folder.
 | Styles (Scss) | `app/styles`  |
 | Templates     | `app/templates`  |
 | Images        | `app/images`  |
-| Fonts        | `app/fonts`  |
-| Icons        | `app/icons`  |
+| Fonts         | `app/fonts`  |
+| Icons         | `app/icons`  |
 
 A lot of starter kits and tutorials encourage you to work directly inside the `www` folder, but I chose `app` instead, as it conforms better with most Angular.js projects. Note that `www` is gitignored and will be created dynamically during our build process.
 
 All 3rd party Javascript sources have to be manually added into `.vendor.json` and will be concatenated into a single `vendor.js` file.
+I know there is [wiredep](https://github.com/taptapship/wiredep) but I prefer to explicitly control which files get injected and also wiredep ends up adding lots of `<script>` tags in your index.html instead of building a single vendor.json file.
 
 
 ## Workflow
