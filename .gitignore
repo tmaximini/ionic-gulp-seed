@@ -6,7 +6,8 @@ platforms/
 plugins/
 bower_components/
 
-.tmp
+.tmp/
+www/
 .sass-cache
 *.DS_Store
 *.log
