@@ -1,6 +1,15 @@
 # Ionic Gulp Seed
 ### An ionic starter project with a gulp toolchain
 
+## Features
+
+* Gulp jobs for development, building, emulating and running your app
+* Compiles and concatenates your Sass
+* Local development server with live reload
+* Automatically inject all your JS sources into index.html
+* Auto min-safe all Angular DI through ng-annotate, no need to use bracket notation
+* Blazing fast
+
 
 ## Installation
 
