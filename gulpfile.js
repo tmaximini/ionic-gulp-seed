@@ -80,6 +80,8 @@ gulp.task('styles', function() {
 });
 
 
+// build templatecache, copy scripts.
+// if build: concat, minsafe, uglify and versionize
 gulp.task('scripts', function() {
   var dest = path.join(targetDir, build ? '' : 'scripts');
 
@@ -90,6 +92,8 @@ gulp.task('scripts', function() {
     removeComments: true
   };
 
+  // prepare angular template cache from html templates
+  // (remember to change appName var to desired module name)
   var templateStream = gulp
     .src('**/*.html', { cwd: 'app/templates'})
     .pipe(plugins.angularTemplatecache('templates.js', {
