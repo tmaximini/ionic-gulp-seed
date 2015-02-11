@@ -7,7 +7,8 @@
 * Compiles and concatenates your Sass
 * Local development server with live reload
 * Automatically inject all your JS sources into `index.html`
-* Auto min-safe all Angular DI through `ng-annotate`, no need to use bracket notation
+* Auto min-safe all Angular DI through `ng-annotate`, no need to use weird bracket notation
+* Comes already with [ng-cordova](http://ngcordova.com/) and [lodash](https://lodash.com)
 * Blazing fast
 
 
