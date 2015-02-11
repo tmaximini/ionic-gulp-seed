@@ -24,7 +24,7 @@
     "gulp-load-plugins": "^0.8.0",
     "gulp-ng-annotate": "^0.5.0",
     "gulp-rev": "^3.0.0",
-    "gulp-ruby-sass": "^1.0.0-alpha.2",
+    "gulp-ruby-sass": "^1.0.0-alpha.3",
     "gulp-shell": "^0.2.11",
     "gulp-strip-css-comments": "^1.1.0",
     "gulp-uglify": "^1.1.0",
