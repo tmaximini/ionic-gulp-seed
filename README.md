@@ -9,6 +9,7 @@
 * Automatically inject all your JS sources into `index.html`
 * Auto min-safe all Angular DI through `ng-annotate`, no need to use weird bracket notation
 * Comes already with [ng-cordova](http://ngcordova.com/) and [lodash](https://lodash.com)
+* generate icon font from svg files
 * Blazing fast
 
 

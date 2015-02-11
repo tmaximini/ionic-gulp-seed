@@ -2,6 +2,7 @@
   "name": "ionicgulpseed",
   "version": "1.0.0",
   "description": "A blank seed project for rapid development of Ionic projects through gulp workflows",
+  "author": "Thomas Maximini <tmaximini@gmail.com>",
   "dependencies": {},
   "devDependencies": {
     "beepbeep": "^1.2.0",
