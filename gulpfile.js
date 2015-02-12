@@ -192,7 +192,7 @@ gulp.task('vendor', function() {
 // get all our javascript sources
 // in development mode, it's better to add each file seperately.
 // it makes debugging easier.
-var _getScriptDevSrc = function() {
+var _getAllScriptSources = function() {
   var scriptStream = gulp.src(['scripts/app.js', 'scripts/**/*.js'], { cwd: targetDir });
   return streamqueue({ objectMode: true }, scriptStream);
 };
@@ -216,10 +216,10 @@ gulp.task('index', function() {
     .pipe(_inject(gulp.src(cssNaming, { cwd: targetDir }), 'app-styles'))
     // inject vendor.js
     .pipe(_inject(gulp.src('vendor*.js', { cwd: targetDir }), 'vendor'))
-    // inject app.s (build) or all js files indivually (dev)
+    // inject app.js (build) or all js files indivually (dev)
     .pipe(plugins.if(build,
       _inject(gulp.src('app*.js', { cwd: targetDir }), 'app'),
-      _inject(_getScriptDevSrc(), 'app')
+      _inject(_getAllScriptSources(), 'app')
     ))
 
     .pipe(gulp.dest(targetDir))
