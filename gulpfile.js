@@ -189,13 +189,6 @@ gulp.task('vendor', function() {
     .on('error', errorHandler);
 });
 
-// get all our javascript sources
-// in development mode, it's better to add each file seperately.
-// it makes debugging easier.
-var _getAllScriptSources = function() {
-  var scriptStream = gulp.src(['scripts/app.js', 'scripts/**/*.js'], { cwd: targetDir });
-  return streamqueue({ objectMode: true }, scriptStream);
-};
 
 // inject the files in index.html
 gulp.task('index', function() {
@@ -203,12 +196,21 @@ gulp.task('index', function() {
   // build has a '-versionnumber' suffix
   var cssNaming = build ? 'styles/main-*' : 'styles/main*';
 
+  // injects 'src' into index.html at position 'tag'
   var _inject = function(src, tag) {
     return plugins.inject(src, {
       starttag: '<!-- inject:' + tag + ':{{ext}} -->',
       read: false,
       addRootSlash: false
     });
+  };
+
+  // get all our javascript sources
+  // in development mode, it's better to add each file seperately.
+  // it makes debugging easier.
+  var _getAllScriptSources = function() {
+    var scriptStream = gulp.src(['scripts/app.js', 'scripts/**/*.js'], { cwd: targetDir });
+    return streamqueue({ objectMode: true }, scriptStream);
   };
 
   return gulp.src('app/index.html')
