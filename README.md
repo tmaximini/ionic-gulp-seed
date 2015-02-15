@@ -83,3 +83,4 @@ By running `gulp -r <platform>`, we can run our app on a connected device
 - It will run the `gulp --build` before, so we have a fresh version to test
 
 
+There is also a [blog post with more detailed information about this gulp workflow](http://www.thomasmaximini.com/2015/02/10/speeding-up-ionic-app-development-with-gulp.html)
