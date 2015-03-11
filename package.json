@@ -1,6 +1,6 @@
 {
   "name": "ionicgulpseed",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A blank seed project for rapid development of Ionic projects through gulp workflows",
   "author": "Thomas Maximini <tmaximini@gmail.com>",
   "dependencies": {},
