@@ -75,6 +75,7 @@ By running just `gulp --build` or short `gulp -b`, we start gulp in build mode
 - concat all `.js` sources into single `app.js` file
 - version `main.css` and `app.js`
 - build everything into `www` folder
+- remove debugs messages such as `console.log` or `alert` with passing `--release`
 
 
 #### Emulate

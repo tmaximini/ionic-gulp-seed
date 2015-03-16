@@ -25,14 +25,18 @@ var args = require('yargs')
     .alias('e', 'emulate')
     .alias('b', 'build')
     .alias('r', 'run')
+    // remove all debug messages (console.logs, alerts etc) from release build
+    .alias('release', 'strip-debug')
     .default('build', false)
     .default('port', 9000)
+    .default('strip-debug', false)
     .argv;
 
 var build = !!(args.build || args.emulate || args.run);
 var emulate = args.emulate;
 var run = args.run;
 var port = args.port;
+var stripDebug = !!args.stripDebug;
 var targetDir = path.resolve(build ? 'www' : '.tmp');
 
 // if we just use emualate or run without specifying platform, we assume iOS
@@ -109,6 +113,7 @@ gulp.task('scripts', function() {
 
   return streamqueue({ objectMode: true }, scriptStream, templateStream)
     .pipe(plugins.if(build, plugins.ngAnnotate()))
+    .pipe(plugins.if(stripDebug, plugins.stripDebug()))
     .pipe(plugins.if(build, plugins.concat('app.js')))
     .pipe(plugins.if(build, plugins.uglify()))
     .pipe(plugins.if(build, plugins.rev()))
