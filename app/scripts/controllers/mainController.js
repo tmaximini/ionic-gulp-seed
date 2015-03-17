@@ -5,6 +5,7 @@
  * @name IonicGulpSeed.controller:MainController
  * @description
  * # MainController
+ * This controller handles the side menu
  */
 angular.module('IonicGulpSeed')
     .controller('MainController', function($scope) {

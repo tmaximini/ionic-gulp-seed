@@ -16,6 +16,8 @@ var connectLr = require('connect-livereload');
 var streamqueue = require('streamqueue');
 var runSequence = require('run-sequence');
 var merge = require('merge-stream');
+var fs = require('fs');
+var changelog = require('conventional-changelog');
 
 
 /**
@@ -57,6 +59,20 @@ var errorHandler = function(error) {
     plugins.util.log(error);
   }
 };
+
+
+gulp.task('changelog', function() {
+  var dest = argv.dest || 'CHANGELOG.md';
+  var toHtml = !!argv.html;
+  return makeChangelog(argv).then(function(log) {
+    if (toHtml) {
+      log = marked(log, {
+        gfm: true
+      });
+    }
+    fs.writeFileSync(dest, log);
+  });
+});
 
 // clean target dir
 gulp.task('clean', function(done) {
