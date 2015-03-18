@@ -66,6 +66,7 @@ gulp.task('clean', function(done) {
 
 // precompile .scss and concat with ionic.css
 gulp.task('styles', function() {
+
   var options = build ?
                 { style: 'compressed' } :
                 { style: 'expanded' };
@@ -79,7 +80,7 @@ gulp.task('styles', function() {
   return streamqueue({ objectMode: true }, cssStream, sassStream)
     .pipe(plugins.concat('main.css'))
     .pipe(plugins.if(build, plugins.stripCssComments()))
-    .pipe(plugins.if(build, plugins.rev()))
+    .pipe(plugins.if(build && !emulate, plugins.rev()))
     .pipe(gulp.dest(path.join(targetDir, 'styles')))
     .on('error', errorHandler);
 });
@@ -88,7 +89,7 @@ gulp.task('styles', function() {
 // build templatecache, copy scripts.
 // if build: concat, minsafe, uglify and versionize
 gulp.task('scripts', function() {
-  var dest = path.join(targetDir, build ? '' : 'scripts');
+  var dest = path.join(targetDir, 'scripts');
 
   var minifyConfig = {
     collapseWhitespace: true,
@@ -117,7 +118,7 @@ gulp.task('scripts', function() {
     .pipe(plugins.if(stripDebug, plugins.stripDebug()))
     .pipe(plugins.if(build, plugins.concat('app.js')))
     .pipe(plugins.if(build, plugins.uglify()))
-    .pipe(plugins.if(build, plugins.rev()))
+    .pipe(plugins.if(build && !emulate, plugins.rev()))
 
     .pipe(gulp.dest(dest))
 
@@ -197,10 +198,10 @@ gulp.task('vendor', function() {
 
 
 // inject the files in index.html
-gulp.task('index', function() {
+gulp.task('index', ['jsHint', 'scripts'], function() {
 
   // build has a '-versionnumber' suffix
-  var cssNaming = build ? 'styles/main-*' : 'styles/main*';
+  var cssNaming = 'styles/main*';
 
   // injects 'src' into index.html at position 'tag'
   var _inject = function(src, tag) {
@@ -226,7 +227,7 @@ gulp.task('index', function() {
     .pipe(_inject(gulp.src('vendor*.js', { cwd: targetDir }), 'vendor'))
     // inject app.js (build) or all js files indivually (dev)
     .pipe(plugins.if(build,
-      _inject(gulp.src('app*.js', { cwd: targetDir }), 'app'),
+      _inject(gulp.src('scripts/app*.js', { cwd: targetDir }), 'app'),
       _inject(_getAllScriptSources(), 'app')
     ))
 
@@ -245,7 +246,7 @@ gulp.task('serve', function() {
 
 // ionic emulate wrapper
 gulp.task('ionic:emulate', plugins.shell.task([
-  'ionic emulate ' + emulate
+  'ionic emulate ' + emulate + ' --livereload --consolelogs'
 ]));
 
 // ionic run wrapper
@@ -287,9 +288,9 @@ gulp.task('watchers', function() {
   gulp.watch('app/fonts/**', ['fonts']);
   gulp.watch('app/icons/**', ['iconfont']);
   gulp.watch('app/images/**', ['images']);
-  gulp.watch('app/scripts/**/*.js', ['jsHint', 'scripts', 'index']);
+  gulp.watch('app/scripts/**/*.js', ['index']);
   gulp.watch('./vendor.json', ['vendor']);
-  gulp.watch('app/templates/**/*.html', ['scripts', 'index']);
+  gulp.watch('app/templates/**/*.html', ['index']);
   gulp.watch('app/index.html', ['index']);
   gulp.watch(targetDir + '/**')
     .on('change', plugins.livereload.changed)
@@ -316,7 +317,7 @@ gulp.task('default', function(done) {
     'index',
     build ? 'noop' : 'watchers',
     build ? 'noop' : 'serve',
-    emulate ? 'ionic:emulate' : 'noop',
+    emulate ? ['ionic:emulate', 'watchers'] : 'noop',
     run ? 'ionic:run' : 'noop',
     done);
 });
