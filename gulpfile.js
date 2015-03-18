@@ -16,9 +16,7 @@ var connectLr = require('connect-livereload');
 var streamqueue = require('streamqueue');
 var runSequence = require('run-sequence');
 var merge = require('merge-stream');
-var fs = require('fs');
-var changelog = require('conventional-changelog');
-
+var ripple = require('ripple-emulator');
 
 /**
  * Parse arguments
@@ -60,19 +58,6 @@ var errorHandler = function(error) {
   }
 };
 
-
-gulp.task('changelog', function() {
-  var dest = argv.dest || 'CHANGELOG.md';
-  var toHtml = !!argv.html;
-  return makeChangelog(argv).then(function(log) {
-    if (toHtml) {
-      log = marked(log, {
-        gfm: true
-      });
-    }
-    fs.writeFileSync(dest, log);
-  });
-});
 
 // clean target dir
 gulp.task('clean', function(done) {
@@ -278,6 +263,22 @@ gulp.task('splash', plugins.shell.task([
 gulp.task('resources', plugins.shell.task([
   'ionic resources'
 ]));
+
+// ripple emulator
+gulp.task('ripple', ['scripts', 'styles', 'watchers'], function() {
+
+  var options = {
+    keepAlive: false,
+    open: true,
+    port: 4400
+  };
+
+  // Start the ripple server
+  ripple.emulate.start(options);
+
+  open('http://localhost:' + options.port + '?enableripple=true');
+});
+
 
 // start watchers
 gulp.task('watchers', function() {
