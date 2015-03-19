@@ -313,8 +313,6 @@ gulp.task('default', function(done) {
       'templates',
       'styles',
       'images',
-      'jsHint',
-      'scripts',
       'vendor'
     ],
     'index',
