@@ -9,7 +9,7 @@
             pulling-text="Pull to refresh..."
             on-refresh="fetchRandomText()">
         </ion-refresher>
-        <div class="loader"  ng-if="!myHTML">
+        <div class="loader" ng-if="!myHTML">
             <ion-spinner></ion-spinner>
         </div>
         <div class="content" ng-bind-html="myHTML">

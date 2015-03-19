@@ -265,6 +265,11 @@ gulp.task('resources', plugins.shell.task([
   'ionic resources'
 ]));
 
+// select emulator device
+gulp.task('select', plugins.shell.task([
+  './emulateios'
+]));
+
 // ripple emulator
 gulp.task('ripple', ['scripts', 'styles', 'watchers'], function() {
 

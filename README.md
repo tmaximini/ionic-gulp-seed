@@ -7,7 +7,7 @@ Heads-up: There is now also a [Yeoman Generator](https://github.com/tmaximini/ge
 
 * Gulp jobs for development, building, emulating and running your app
 * Compiles and concatenates your Sass
-* Local development server with live reload
+* Local development server with live reload, even inside ios emulator
 * Automatically inject all your JS sources into `index.html`
 * Auto min-safe all Angular DI through `ng-annotate`, no need to use weird bracket notation
 * Comes already with [ng-cordova](http://ngcordova.com/) and [lodash](https://lodash.com)
@@ -83,9 +83,20 @@ By running just `gulp --build` or short `gulp -b`, we start gulp in build mode
 By running `gulp -e <platform>`, we can run our app in the simulator
 
 - <platform> can be either `ios` or `android`, defaults to `ios`
-- make sure to have iOS Simulator installed in XCode, as well as `ios-sim` package installed (`npm install -g ios-sim`)
-- for Android, [Genymotion](https://www.genymotion.com/) seems to be the emulator of choice
+- make sure to have iOS Simulator installed in XCode, as well as `ios-sim` package globally installed (`npm install -g ios-sim`)
+- for Android, [Ripple](http://ripple.incubator.apache.org/) or [Genymotion](https://www.genymotion.com/) seem to be the emulators of choice
 - It will run the `gulp --build` before, so we have a fresh version to test
+- In iOS, it will livereload any code changes in iOS simulator
+
+#### Emulate a specific iOS device
+
+By running `gulp select` you will se a prompt where you can choose which ios device to emualte. In this case, livereload inside iOS simulator will not work.
+
+
+#### Ripple Emulator
+
+Run `gulp ripple` to open your app in a browser using ripple. This is useful for emuating a bunch of different Android devices and settings, such as geolocation, battery status, globalization and more. Note that ripple is still in beta and will show weird debug messages from time to time.
+
 
 #### Run
 
