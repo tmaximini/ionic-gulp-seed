@@ -239,7 +239,7 @@ gulp.task('serve', function() {
     .use(!build ? connectLr() : function(){})
     .use(express.static(targetDir))
     .listen(port);
-  open('http://localhost:' + port + '/', 'Google Chrome');
+  open('http://localhost:' + port + '/');
 });
 
 // ionic emulate wrapper
