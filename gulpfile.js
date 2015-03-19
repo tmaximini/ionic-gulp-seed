@@ -67,9 +67,7 @@ gulp.task('clean', function(done) {
 // precompile .scss and concat with ionic.css
 gulp.task('styles', function() {
 
-  var options = build ?
-                { style: 'compressed' } :
-                { style: 'expanded' };
+  var options = build ? { style: 'compressed' } : { style: 'expanded' };
 
   var sassStream = plugins.rubySass('app/styles/main.scss', options)
       .pipe(plugins.autoprefixer('last 1 Chrome version', 'last 3 iOS versions', 'last 3 Android versions'))
