@@ -9,7 +9,7 @@
  * Uses settings from API_ENDPOINT defined in /config/apiEndpoint.js
  */
 angular.module('IonicGulpSeed')
-    .factory('spaApiService', function($window, $http, API_ENDPOINT) {
+    .factory('apiService', function($window, $http, API_ENDPOINT) {
 
         var _api = API_ENDPOINT;
         var endpoint = _api.port ? (_api.host + ':' + _api.port + _api.path) : (_api.host + _api.path);
