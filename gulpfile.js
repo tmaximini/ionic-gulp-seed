@@ -50,7 +50,7 @@ if (run === true) {
 
 // global error handler
 var errorHandler = function(error) {
-  if (build || prePush) {
+  if (build) {
     throw error;
   } else {
     beep(2, 170);
