@@ -17,6 +17,7 @@ var streamqueue = require('streamqueue');
 var runSequence = require('run-sequence');
 var merge = require('merge-stream');
 var ripple = require('ripple-emulator');
+var sass = require('gulp-sass');
 
 /**
  * Parse arguments
@@ -69,8 +70,10 @@ gulp.task('styles', function() {
 
   var options = build ? { style: 'compressed' } : { style: 'expanded' };
 
-  var sassStream = plugins.rubySass('app/styles/main.scss', options)
-      .pipe(plugins.autoprefixer('last 1 Chrome version', 'last 3 iOS versions', 'last 3 Android versions'))
+  var sassStream = gulp
+    .src('app/styles/main.scss')
+    .pipe(sass(options))
+    .pipe(plugins.autoprefixer('last 1 Chrome version', 'last 3 iOS versions', 'last 3 Android versions'));
 
   var cssStream = gulp
     .src('bower_components/ionic/css/ionic.min.css');
