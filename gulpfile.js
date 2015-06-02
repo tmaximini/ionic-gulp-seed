@@ -50,11 +50,12 @@ if (run === true) {
 }
 
 // global error handler
-var errorHandler = function(error) {
+function errorHandler(error) {
+  console.log('beep: ', beep);
+  beep();
   if (build) {
     throw error;
   } else {
-    beep(2, 170);
     plugins.util.log(error);
   }
 };
@@ -70,15 +71,23 @@ gulp.task('styles', function() {
 
   var options = build ? { style: 'compressed' } : { style: 'expanded' };
 
-  var sassStream = gulp
-    .src('app/styles/main.scss')
+  var sassStream = gulp.src('app/styles/main.scss')
     .pipe(sass(options))
-    .pipe(plugins.autoprefixer('last 1 Chrome version', 'last 3 iOS versions', 'last 3 Android versions'));
+    .on('error', function(err) {
+      console.log('err: ', err);
+      beep();
+    });
 
-  var cssStream = gulp
-    .src('bower_components/ionic/css/ionic.min.css');
 
-  return streamqueue({ objectMode: true }, cssStream, sassStream)
+  var ionicStream = gulp.src('bower_components/ionic/scss/ionic.scss')
+    .pipe(sass(options))
+    .on('error', function(err) {
+        console.log('err: ', err);
+        beep();
+      });
+
+  return streamqueue({ objectMode: true }, ionicStream, sassStream)
+    .pipe(plugins.autoprefixer('last 1 Chrome version', 'last 3 iOS versions', 'last 3 Android versions'))
     .pipe(plugins.concat('main.css'))
     .pipe(plugins.if(build, plugins.stripCssComments()))
     .pipe(plugins.if(build && !emulate, plugins.rev()))
