@@ -55,6 +55,8 @@ I know there is [wiredep](https://github.com/taptapship/wiredep) but I prefer to
 This doc assumes you have `gulp` globally installed (`npm install -g gulp`).
 If you do not have / want gulp globally installed, you can run `npm run gulp` instead.
 
+Secondly, you need to have cordova and ionic cli installed (`npm install -g cordova` and `npm install -g ionic`. _Note:_ when you run `cordova platform add android` for the first time, it will give an error _Error: Current working directory is not a Cordova-based project._. The reason is that you are not having the _www_ folder. All you have to do is to run `gulp --build` to generate the folder.
+
 #### Development mode
 
 By running just `gulp`, we start our development build process, consisting of:
