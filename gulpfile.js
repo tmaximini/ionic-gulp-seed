@@ -18,6 +18,7 @@ var runSequence = require('run-sequence');
 var merge = require('merge-stream');
 var ripple = require('ripple-emulator');
 var cache = require('gulp-cached');
+var KarmaServer = require('karma').Server;
 
 /**
  * Parse arguments
@@ -316,6 +317,14 @@ gulp.task('watchers', function() {
 
 // no-op = empty function
 gulp.task('noop', function() {});
+
+//testing
+gulp.task('test', function(done){
+  new KarmaServer({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
 
 // our main sequence, with some conditional jobs depending on params
 gulp.task('default', function(done) {
