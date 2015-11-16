@@ -15,7 +15,7 @@ describe('HomeController', function(){
 		sinon.stub(ExampleService, 'doSomethingAsync', ExampleService.doSomethingAsync);
 	}));
 
-	it('calls the method doSomethingAsync()', function(done){
+	it('calls the method doSomethingAsync()', function(){
 		scope.fetchRandomText();
 		expect(ExampleService.doSomethingAsync.called).to.eq(true);
 
