@@ -1,5 +1,15 @@
 // Karma configuration
 // Generated on Sat Nov 14 2015 22:37:58 GMT+1100 (AEDT)
+var vendorJsFiles = require('./vendor.json');
+
+var _ = require('underscore');
+
+var appJsFiles = [
+  'app/scripts/**/*.js',
+  'test/unit/**/*.js'
+];
+
+var jsFiles = _.union(vendorJsFiles,appJsFiles);
 
 module.exports = function(config) {
   config.set({
@@ -10,14 +20,11 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha'],
+    frameworks: ['mocha', 'chai'],
 
 
     // list of files / patterns to load in the browser
-    files: [
-      'app/scripts/**/*.js',
-      'test/unit/**/*.js'
-    ],
+    files: jsFiles,
 
 
     // list of files to exclude
