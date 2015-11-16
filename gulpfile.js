@@ -319,7 +319,7 @@ gulp.task('watchers', function() {
 gulp.task('noop', function() {});
 
 //testing
-gulp.task('test', function(done){
+gulp.task('test-unit', function(done){
   new KarmaServer({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
