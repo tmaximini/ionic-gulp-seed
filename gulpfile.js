@@ -260,7 +260,7 @@ gulp.task('serve', function() {
     .use(!build ? connectLr() : function(){})
     .use(express.static(targetDir))
     .listen(port);
-  //open('http://localhost:' + port + '/');
+  open('http://localhost:' + port + '/');
 });
 
 // ionic emulate wrapper
@@ -341,9 +341,8 @@ function getProtractorBinary(binaryName){
     return path.join(protractorDir, '/'+binaryName);
 }
 
-gulp.task('test-e2e', function(){
+gulp.task('test-e2e', ['default'], function(){
   var protractor = plugins.protractor.protractor;
-  gulp.run('default');
 
   return new Promise(function(resolve, reject){
     /**
