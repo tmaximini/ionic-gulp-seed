@@ -130,7 +130,7 @@ There is also a [blog post with more detailed information about this gulp workfl
 ## Testing
 
 ### Unit Testing
-Unit Testing is done using [Karma] runner. The main configuration file is `karma.conf.js` under root folder. You can change the frameworks to be used by changing the `frameworks` key in `karma.conf.js` file. Currently [MochaJS], [Chai] (BDD testing style) and [Sinon] are being used.
+Unit Testing is done using [Karma] runner. The main configuration file is `karma.conf.js` under root folder. You can change the frameworks to be used by changing the `frameworks` key in `karma.conf.js` file. Currently [MochaJS], [Chai]\(BDD testing style) and [Sinon] are being used.
 
 All the html files `app/templates/**/*.html` are converted to angular module `AppTemplate` using [html2js](https://github.com/karma-runner/karma-ng-html2js-preprocessor) when you run `gulp test-unit`. Hence, you need to write `beforeEach(module('AppTemplate'))` in your test files so that angular will not give you a GET error when looking for the template files.
 
