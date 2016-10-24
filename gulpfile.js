@@ -33,10 +33,12 @@ var args = require('yargs')
     .alias('e', 'emulate')
     .alias('b', 'build')
     .alias('r', 'run')
+    .alias('pr', 'port-reload')
     // remove all debug messages (console.logs, alerts etc) from release build
     .alias('release', 'strip-debug')
     .default('build', false)
     .default('port', 9000)
+    .default('port-reload', Math.floor(Math.random() * (35730 - 35700) + 35700))
     .default('strip-debug', false)
     .argv;
 
@@ -44,6 +46,7 @@ var build = !!(args.build || args.emulate || args.run);
 var emulate = args.emulate;
 var run = args.run;
 var port = args.port;
+var livereload = args.portReload;
 var stripDebug = !!args.stripDebug;
 var targetDir = path.resolve(build ? 'www' : '.tmp');
 
@@ -257,7 +260,7 @@ gulp.task('index', ['jsHint', 'scripts'], function() {
 // start local express server
 gulp.task('serve', function() {
   server = express()
-    .use(!build ? connectLr() : function(){})
+    .use(!build ? connectLr({port: livereload}) : function(){})
     .use(express.static(targetDir))
     .listen(port);
   open('http://localhost:' + port + '/');
@@ -307,7 +310,7 @@ gulp.task('ripple', ['scripts', 'styles', 'watchers'], function() {
 
 // start watchers
 gulp.task('watchers', function() {
-  plugins.livereload.listen();
+  plugins.livereload.listen(livereload);
   gulp.watch('app/styles/**/*.scss', ['styles']);
   gulp.watch('app/fonts/**', ['fonts']);
   gulp.watch('app/icons/**', ['iconfont']);
